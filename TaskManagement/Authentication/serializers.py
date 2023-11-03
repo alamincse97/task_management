@@ -17,8 +17,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'error': 'password does not matched'})
         if User.objects.filter(email = email).exists():
             raise serializers.ValidationError({'error': 'email already exists'})
-        Authentication = User(username= username, email = email)
-        Authentication.set_password(password)
-        Authentication.save()
-        return Authentication
+        account = User(username= username, email = email)
+        account.set_password(password)
+        account.save()
+        return account
         
