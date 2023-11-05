@@ -1,9 +1,12 @@
-from rest_framework import serializers, status
+from rest_framework import serializers, status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import RegistrationSerializer
 from rest_framework.authtoken.models import Token
-from . import signals
+from django.contrib.auth.models import User
+from django.utils.encoding import force_bytes
+
+from . import signals, serializers
 
 class RegistrationView(APIView):
     def post(self, request):
@@ -24,3 +27,5 @@ class LogoutView(APIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status = status.HTTP_200_OK)
+    
+        
